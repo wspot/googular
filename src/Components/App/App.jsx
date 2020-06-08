@@ -1,99 +1,79 @@
-import React from 'react';
+import React, { useState } from 'react';
 import './App.css';
 import TextField from '@material-ui/core/TextField';
-
 import Autocomplete from '@material-ui/lab/Autocomplete';
+import Card from './../Card/Card';
+
+let fetchedData = require('./../../data.json');
 
 
-const top100Films = [
-  { title: 'The Shawshank Redemption', year: 1994 },
-  { title: 'The Godfather', year: 1972 },
-  { title: 'The Godfather: Part II', year: 1974 },
-  { title: 'The Dark Knight', year: 2008 },
-  { title: '12 Angry Men', year: 1957 }
+const searchTopics = [
+  { title: 'Installing third parties', id: 1 },
+  { title: 'Routing', id: 2 },
+  { title: 'Setup', id: 3 },
+  { title: 'Angular cli', id: 4 },
+  { title: 'Components & templates', id: 5 },
+  { title: 'Http', id: 6 },
 ];
 
 function App() {
+
+  const [state, setState] = useState(fetchedData.response);
+
+  const handleChange = (e, val) => {
+    if (val.length === 0) {
+      setState(fetchedData.response);
+    } else {
+      let ids = val.map((item) => { return item.id });
+      let result = state.filter((item) => { return compareArrays(item.topics, ids) });
+      setState(result)
+    }
+  }
+
+  const compareArrays = (topics, idArray) => {
+    let result = false;
+    topics.forEach(element => {
+      if (idArray.includes(element)) {
+        result = true;
+      }
+    });
+    return result;
+  }
+
   return (
     <>
-
       <div className="container">
         <h1 className="text-center display-4  mt-5"> Googular </h1>
 
         <div className="row justify-content-center">
-          <div className="col-auto mt-4">
+          <div className="col-sm-6 mt-4">
             <Autocomplete
               multiple
+              freeSolo
               fullWidth
-              id="combo-box-demo"
-              options={top100Films}
+              options={searchTopics}
+              onChange={handleChange}
               getOptionLabel={(option) => option.title}
-              style={{ width: 300 }}
               renderInput={(params) =>
-                <TextField {...params} label="Search here ..." variant="outlined" fullWidth />}
+                <TextField {...params} label="Search here ..." variant="outlined" />}
             />
           </div>
         </div>
-        <div className="row mt-5 justify-content-center ">
-          <div className="col-sm-8 bg-light p-3">
+        <div className="row mt-3 justify-content-center ">
+
+          <div className="col-sm-8 bg-light border border-light rounded shadow p-3 ">
+            <h5 className="text-center ">Popular searches</h5>
             <div className="row">
-
-              <div className="col-sm-4">
-                <div className="card">
-                  <div className="card-body">
-                    <button type="button" className="close" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h5 className="card-title">Special title treatment</h5>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-sm-4">
-                <div className="card">
-                  <div className="card-body">
-                    <button type="button" className="close" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h5 className="card-title">Special title treatment</h5>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-sm-4">
-                <div className="card">
-                  <div className="card-body">
-                    <button type="button" className="close" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h5 className="card-title">Special title treatment</h5>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  </div>
-                </div>
-              </div>
-
-              <div className="col-sm-4">
-                <div className="card">
-                  <div className="card-body">
-                    <button type="button" className="close" aria-label="Close">
-                      <span aria-hidden="true">&times;</span>
-                    </button>
-                    <h5 className="card-title">Special title treatment</h5>
-                    <p className="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                  </div>
-                </div>
-              </div>
-
+              {
+                state.map((item, index) => {
+                  return <Card data={item} key={index} />;
+                })
+              }
             </div>
           </div>
-
         </div>
       </div>
-
     </>
-
   );
 }
 
