@@ -4,7 +4,8 @@ var Schema = mongoose.Schema;
 var searchResultSchema = new Schema({
     title: String,
     description: String,
-    topics: [Number]
+    topics: [Number],
+    redirectionLink: String
 });
 
 const Searchresult = mongoose.model('SearchResult', searchResultSchema);
