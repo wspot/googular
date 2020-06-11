@@ -2,6 +2,8 @@ const { Router } = require('express');
 const router = Router();
 const searchResult = require('./../models/SearchResult');
 
+const mongoose = require('mongoose');
+
 router.get('/searchResults', async (req, res, next) => {
     try {
         const results = await searchResult.find();
@@ -22,6 +24,25 @@ router.post('/getfilteredSearch', async (req, res, next) => {
         next(error);
     }
 });
+
+router.post('/updateItem', async (req, res, next) => {
+    try {
+        let requestId = ('id' in req.body) ? req.body.id : undefined;
+        if (requestId !== undefined) {
+            let searchItem = await searchResult.findById(mongoose.Types.ObjectId(requestId));
+            let result = {};
+            if (searchItem !== null) {
+                searchItem['redirectionLink'] = req.body.link;
+                result = await searchItem.save();
+            }
+            res.json(result);
+        } else {
+            res.json({})
+        }
+    } catch (error) {
+        next(error);
+    }
+})
 
 router.post('/searchResults', async (req, res, next) => {
     try {
