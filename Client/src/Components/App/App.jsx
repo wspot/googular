@@ -46,6 +46,11 @@ function App() {
       });
   }
 
+  const handleDelete = (itemId) => {
+    let newState = state.filter(item => item._id !== itemId);
+    setState(newState);
+  }
+
   return (
     <>
       <div className="container">
@@ -72,7 +77,7 @@ function App() {
             <div className="row">
               {
                 state.map((item, index) => {
-                  return <Card data={item} key={index} />;
+                  return <Card data={item} onDelete={handleDelete} key={item._id} />;
                 })
               }
             </div>
