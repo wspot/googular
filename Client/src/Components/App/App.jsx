@@ -1,11 +1,8 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './App.css';
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 import Card from './../Card/Card';
-
-let fetchedData = require('./../../data.json');
-
 
 const searchTopics = [
   { title: 'Installing third parties', id: 1 },
@@ -16,28 +13,37 @@ const searchTopics = [
   { title: 'Http', id: 6 },
 ];
 
+
 function App() {
+  const serverAddress = "http://localhost:1337/api/getfilteredSearch";
+  const [state, setState] = useState([]);
 
-  const [state, setState] = useState(fetchedData.response);
+  useEffect(() => {
+    fetchSearchResults().then(res => res.json())
+      .then(({ result }) => {
+        setState(result);
+      });
+  }, []);
 
-  const handleChange = (e, val) => {
-    if (val.length === 0) {
-      setState(fetchedData.response);
-    } else {
-      let ids = val.map((item) => { return item.id });
-      let result = state.filter((item) => { return compareArrays(item.topics, ids) });
-      setState(result)
-    }
+  const fetchSearchResults = (topicsArray = []) => {
+    return fetch(serverAddress, {
+      method: 'POST',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        topics: topicsArray
+      })
+    })
   }
 
-  const compareArrays = (topics, idArray) => {
-    let result = false;
-    topics.forEach(element => {
-      if (idArray.includes(element)) {
-        result = true;
-      }
-    });
-    return result;
+  const handleChange = (e, val) => {
+    let topicIds = val.map((item) => { return item.id });
+    fetchSearchResults(topicIds).then(res => res.json())
+      .then(({ result }) => {
+        setState(result);
+      });
   }
 
   return (
