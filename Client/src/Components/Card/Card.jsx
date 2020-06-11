@@ -1,4 +1,6 @@
 import React from 'react';
+import { Link } from "react-router-dom";
+
 
 function Card({ data, onDelete }) {
 
@@ -11,6 +13,7 @@ function Card({ data, onDelete }) {
                     </button>
                     <h5 className="card-title">{data.title} </h5>
                     <p className="card-text">{data.description}</p>
+                    <Link className="card-link" to={data.redirectionLink}>Read more </Link>
                 </div>
             </div>
         </div>
