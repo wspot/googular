@@ -11,9 +11,11 @@ function InstallingBootstrap() {
                     <h5 className="text-center ">installing bootstrap</h5>
                     <div className="row">
                         <ul>
-                            <li>install bootstrap </li>
-                            <li>run commands</li>
-                            <li> open browser </li>
+                            <li>go to the project root folder : </li>
+                            <li>run this command : npm install bootstrap </li>
+                            <li>modify your angular.json like this : <br /> <code>"styles": [
+                            "src/styles.css",
+                                    "node_modules/bootstrap/dist/css/bootstrap.min.css"]   </code> </li>
                         </ul>
                     </div>
                 </div>

@@ -4,6 +4,8 @@ import { Link } from "react-router-dom";
 
 function UsingHttp() {
 
+    let item = 'import {HttpClient} from \'@angular/common/http\'';
+
     return (
         <div className="container">
             <div className="row  mt-5 justify-content-center ">
@@ -11,9 +13,15 @@ function UsingHttp() {
                     <h5 className="text-center ">Using http </h5>
                     <div className="row">
                         <ul>
-                            <li>install bootstrap </li>
-                            <li>run commands</li>
-                            <li> open browser </li>
+                            <li>import http client : <br />
+                                <code>{item} </code>
+                            </li>
+                            <li>inject it in your component constructor : <br />
+                                <code> constructor(private http: HttpClient) </code>
+                            </li>
+                            <li>make your http calls : <br />
+                                <code> this.http.get(this.configUrl); </code>
+                            </li>
                         </ul>
                     </div>
                 </div>

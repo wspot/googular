@@ -11,9 +11,9 @@ function InstallingMui() {
                     <h5 className="text-center ">installing material ui</h5>
                     <div className="row">
                         <ul>
-                            <li>install bootstrap </li>
-                            <li>run commands</li>
-                            <li> open browser </li>
+                            <li>Go to the official docs (it's time to get to know it more )  </li>
+                            <li><a target="_blank" rel="noopener noreferrer" href="https://material.angular.io/guide/getting-started">Open me</a>
+                            </li>
                         </ul>
                     </div>
                 </div>
