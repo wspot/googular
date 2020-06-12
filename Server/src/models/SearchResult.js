@@ -8,5 +8,5 @@ var searchResultSchema = new Schema({
     redirectionLink: String
 });
 
-const Searchresult = mongoose.model('SearchResult', searchResultSchema);
+const Searchresult = mongoose.model('SearchResult', searchResultSchema, 'SearchResult');
 module.exports = Searchresult;

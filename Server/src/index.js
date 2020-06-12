@@ -10,6 +10,7 @@ const middlewares = require('./middlewares');
 const apiRoutes = require('./api/routes');
 const port = process.env.PORT || 1337;
 const app = express();
+
 mongoose.connect(process.env.DATABASE_URL, { useNewUrlParser: true, useUnifiedTopology: true });
 
 app.use(morgan('common'));
