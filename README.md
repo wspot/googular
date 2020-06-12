@@ -1,12 +1,12 @@
-## What is this projects : 
+## What is this project : 
 
-This is a react app that i created during my learning path of react .
-if you are a beginner you can use this code to understand some the core concepts of react .
+This is a react app that i created during my learning path of reactjs .
+if you are a beginner you can use this code to understand some the core concepts of reactjs .
 
 this app cover these concepts  : 
--hooks (useState - useEffect)
--http calls
--routing
+ - hooks (useState - useEffect)
+ - http calls
+ - routing
 
 ## How to run the project : 
 
