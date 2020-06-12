@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 function Card({ data, onDelete }) {
 
     return (
-        <div className="col-sm-4 mt-2">
+        <div className="col-xs-12 col-sm-12 col-md-4 mt-2">
             <div className="card shadow rounded-0">
                 <div className="card-body">
                     <button type="button" className="close" aria-label="Close" onClick={() => { onDelete(data._id) }} >

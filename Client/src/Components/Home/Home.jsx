@@ -53,9 +53,8 @@ function Home() {
         <>
             <div className="container">
                 <h1 className="text-center display-4  mt-5"> Googular </h1>
-
                 <div className="row justify-content-center">
-                    <div className="col-sm-6 mt-4">
+                    <div className="col-sm-8 col-md-6 mt-4">
                         <Autocomplete
                             multiple
                             freeSolo
@@ -69,9 +68,8 @@ function Home() {
                     </div>
                 </div>
                 <div className="row mt-3 justify-content-center ">
-
-                    <div className="col-sm-8 bg-light border border-light rounded shadow p-3 ">
-                        <h5 className="text-center ">Popular searches</h5>
+                    <div className="col-sm-12 col-md-10 bg-light border border-light rounded shadow p-3 ">
+                        <h5 className="text-center ">Search Results</h5>
                         <div className="row">
                             {
                                 state.map((item, index) => {
